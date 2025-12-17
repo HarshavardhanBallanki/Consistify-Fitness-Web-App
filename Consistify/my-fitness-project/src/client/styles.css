@@ -1,0 +1,87 @@
+:root{
+  --primary: #0d6efd;
+  --accent: #6f42c1;
+  --muted: #6c757d;
+  --bg-start: #f7fbff;
+  --bg-end: #eef7fa;
+  --text-dark: #1f2937;
+}
+
+/* Reset / base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin:0;
+  background: linear-gradient(180deg,var(--bg-start),var(--bg-end));
+  color:var(--text-dark);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+}
+
+/* Navbar */
+.navbar{
+  background: linear-gradient(90deg, rgba(13,110,253,0.95), rgba(111,66,193,0.9));
+  box-shadow: 0 4px 18px rgba(13,110,253,0.12);
+}
+.navbar .navbar-brand{ color:#fff; font-weight:600; }
+.brand-img{ width:36px; height:36px; object-fit:cover; border-radius:8px; }
+
+/* Hero */
+.hero{
+  margin-top:1rem;
+  background: linear-gradient(90deg, rgba(13,110,253,0.08), rgba(111,66,193,0.04));
+  border-radius:12px;
+  padding:2rem;
+  color:#fff;
+}
+.hero .display-5{ color:#fff; margin-bottom:0.5rem; }
+.hero .lead{ color:rgba(255,255,255,0.9); }
+
+/* Cards */
+.card{
+  border:none;
+  border-radius:12px;
+  box-shadow: 0 6px 18px rgba(58,59,69,0.06);
+  overflow:hidden;
+}
+.card img, .card .img-fluid{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+/* Forms */
+.form-label{ font-weight:600; color:var(--text-dark); }
+.btn-outline-secondary{ border-radius:8px; }
+
+/* Footer */
+.footer{
+  background: linear-gradient(90deg, rgba(111,66,193,0.9), rgba(13,110,253,0.9));
+  color:#fff;
+  margin-top:2.5rem;
+  border-radius:8px;
+}
+
+/* Utility */
+h2{ color:var(--text-dark); margin-bottom:0.75rem; }
+p.lead{ margin-bottom:1rem; }
+.alert{ border-radius:8px; }
+
+/* Responsive tweaks */
+@media (max-width: 768px){
+  .hero{ padding:1rem; }
+  .card img, .card .img-fluid{ height:140px; }
+}
+
+/* Small helper styles for plan summary and lists */
+#plan-summary{ font-size:0.95rem; color:var(--muted); }
+#sleep-list{ margin:0; padding-left:1.1rem; }
+#sleep-list li{ margin-bottom:0.5rem; }
+
+/* Accessibility focus */
+a:focus, button:focus, input:focus, select:focus{
+  outline:3px solid rgba(13,110,253,0.16);
+  outline-offset:2px;
+}

@@ -1,0 +1,1 @@
+// This file contains tests for the client-side application, ensuring that the JavaScript functions work as expected.

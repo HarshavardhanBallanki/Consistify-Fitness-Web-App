@@ -1,0 +1,236 @@
+[1mdiff --git a/README.md b/README.md[m
+[1mindex 3fe9696..1406f55 100644[m
+[1m--- a/README.md[m
+[1m+++ b/README.md[m
+[36m@@ -1 +1,230 @@[m
+[31m-# Consistify-Fitness-Web-App[m
+[32m+[m[32m# Consistify — Fitness Planner 🌟[m
+[32m+[m
+[32m+[m[32m[![Status](https://img.shields.io/badge/status-prototype-yellow)]()[m
+[32m+[m[32m[![License: MIT](https://img.shields.io/badge/license-MIT-blue)]()[m
+[32m+[m
+[32m+[m[32mConsistify is a responsive, accessible prototype for a personalized fitness planner that helps users:[m
+[32m+[m[32m- Calculate maintenance calories (Mifflin–St Jeor) and suggested macros (protein / fat / carbs).[m
+[32m+[m[32m- Generate and filter workout routines (home, gym, cardio, yoga) according to preferences and intensity.[m
+[32m+[m[32m- Suggest budget-aware diet plans aiming to meet calorie & macro goals, prepared for integration with nutrition APIs to include micros, fiber and cost.[m
+[32m+[m[32m- Offer sleep & recovery guidance tailored by age and activity level.[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## Table of contents 📚[m
+[32m+[m[32m- [Why Consistify](#why-consistify)[m
+[32m+[m[32m- [Features](#features)[m
+[32m+[m[32m- [Demo / Screenshots](#demo--screenshots)[m
+[32m+[m[32m- [Tech stack](#tech-stack)[m
+[32m+[m[32m- [Local setup](#local-setup)[m
+[32m+[m[32m- [How it works](#how-it-works)[m
+[32m+[m[32m- [API integration & data flow](#api-integration--data-flow)[m
+[32m+[m[32m- [Algorithms & approach](#algorithms--approach)[m
+[32m+[m[32m- [Data model suggestions](#data-model-suggestions)[m
+[32m+[m[32m- [Mobile apps](#mobile-apps)[m
+[32m+[m[32m- [UX & accessibility](#ux--accessibility)[m
+[32m+[m[32m- [Testing & CI](#testing--ci)[m
+[32m+[m[32m- [Deploying](#deploying)[m
+[32m+[m[32m- [Roadmap](#roadmap)[m
+[32m+[m[32m- [Contributing](#contributing)[m
+[32m+[m[32m- [License](#license)[m
+[32m+[m[32m- [Contact](#contact)[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## Why Consistify ❓[m
+[32m+[m[32mMany people need simple, personalized planning that balances workouts, nutrition and sleep while respecting budgets and exercise preferences. Consistify is designed to be a clear, extensible front-end prototype that demonstrates how to combine calorie math, budget-aware meal suggestions and workouts into a friendly UI — with clear hooks to integrate robust nutrition and exercise APIs.[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## Features ✨[m
+[32m+[m[32m- Calorie calculator (Mifflin–St Jeor) + activity multipliers[m
+[32m+[m[32m- Macro suggestions (protein, fat, carbs)[m
+[32m+[m[32m- Filterable workout plans (home / gym / cardio / yoga)[m
+[32m+[m[32m- Budget-aware diet plan suggestions with calorie match tolerance[m
+[32m+[m[32m- Sleep & recovery tips that adapt to age and activity[m
+[32m+[m[32m- Accessible UI built with Bootstrap[m
+[32m+[m[32m- Image-rich, responsive layouts (Unsplash placeholder images)[m
+[32m+[m[32m- Clear extension points for nutrition/exercise API integration[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## Demo / Screenshots 🖼️[m
+[32m+[m[32m(Screenshots are placeholders — replace with your own when available)[m
+[32m+[m[32m- Hero with background + CTA[m
+[32m+[m[32m- Workout & diet cards with images[m
+[32m+[m[32m- Calorie & macro calculator panel[m
+[32m+[m[32m- Plan summary card with selected options[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## Tech stack 🧰[m
+[32m+[m[32m- Frontend: HTML, CSS (Bootstrap + custom), vanilla JavaScript[m
+[32m+[m[32m- Prototype images: Unsplash (ensure compliance with Unsplash license for production)[m
+[32m+[m[32m- Recommended backend (for production & API keys): Node.js + Express (or serverless on Vercel / AWS Lambda)[m
+[32m+[m[32m- Optional DB: PostgreSQL / MongoDB for user accounts and saved plans[m
+[32m+[m[32m- Mobile: React Native or Flutter (recommended) for Android & iOS[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## Local setup — Getting started 🚀[m
+[32m+[m
+[32m+[m[32mPrerequisites:[m
+[32m+[m[32m- Node.js >= 14 (only required for local web servers or backend)[m
+[32m+[m[32m- Optional: yarn / npm[m
+[32m+[m
+[32m+[m[32mQuick static preview:[m
+[32m+[m[32m1. Open `src/client/index.html` in a browser for a static preview.[m
+[32m+[m[32m2. Or run a static server (recommended):[m
+[32m+[m[32m   - npm i -g serve[m
+[32m+[m[32m   - cd src/client && serve .[m
+[32m+[m
+[32m+[m[32mFor development with a backend:[m
+[32m+[m[32m1. Add a small Express server in `src/server/` to proxy nutrition or exercise API requests (keeps API keys secret).[m
+[32m+[m[32m2. Start the frontend static server and the backend concurrently during development.[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## How it works — high level 🧭[m
+[32m+[m
+[32m+[m[32m1. User enters weight, height, age, gender, activity level, preferences and budget.[m
+[32m+[m[32m2. Client computes BMR (Mifflin–St Jeor) and maintenance calories:[m
+[32m+[m[32m   - Male: BMR = 10*kg + 6.25*cm − 5*age + 5[m
+[32m+[m[32m   - Female: BMR = 10*kg + 6.25*cm − 5*age − 161[m
+[32m+[m[32m   - Other: a safe averaged fallback[m
+[32m+[m[32m3. Maintenance calories = BMR × activityFactor (sedentary → very active)[m
+[32m+[m[32m4. App suggests macros:[m
+[32m+[m[32m   - Protein ~ 1.2–2.2 g/kg (configurable)[m
+[32m+[m[32m   - Fat ~ 25% of calories (example)[m
+[32m+[m[32m   - Carbs fill remaining calories[m
+[32m+[m[32m5. The front-end filters sample workout/diet cards using preferences & budget. For production, the backend will generate meal combinations that meet calorie/macros & budget using nutrition API nutrient data.[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## API integration & data flow 🔗[m
+[32m+[m
+[32m+[m[32mRecommended APIs:[m
+[32m+[m[32m- Edamam Nutrition API (detailed nutrients)[m
+[32m+[m[32m- Nutritionix (food + exercise)[m
+[32m+[m[32m- USDA FoodData Central (open nutrient database)[m
+[32m+[m[32m- Spoonacular (recipes & cost estimates)[m
+[32m+[m[32m- ExerciseDB (exercise metadata & video links)[m
+[32m+[m
+[32m+[m[32mIntegration pattern:[m
+[32m+[m[32m1. Frontend collects user inputs.[m
+[32m+[m[32m2. Frontend calls your backend:[m
+[32m+[m[32m   - POST /api/meal-plan { calories, macros, budget, dietaryPrefs }[m
+[32m+[m[32m3. Backend:[m
+[32m+[m[32m   - Queries nutrition API(s) for candidate foods/recipes[m
+[32m+[m[32m   - Solves for meal combos that balance calories/macros within budget (server-side algorithm)[m
+[32m+[m[32m   - Returns structured plan: meals, nutrient totals, cost estimate[m
+[32m+[m[32m4. Frontend displays meals, shopping list and allows selection[m
+[32m+[m
+[32m+[m[32mSecurity note:[m
+[32m+[m[32m- Never embed API keys in client-side JS. Keep all keys in server-side environment variables or use a secrets store.[m
+[32m+[m
+[32m+[m[32mExample server endpoint (pseudo):[m
+[32m+[m[32m```bash[m
+[32m+[m[32mPOST /api/meal-plan[m
+[32m+[m[32mBody:[m
+[32m+[m[32m{[m
+[32m+[m[32m  "calories": 2000,[m
+[32m+[m[32m  "protein": 120,[m
+[32m+[m[32m  "budget": 6.5,[m
+[32m+[m[32m  "preferences": { "vegan": false, "noNuts": true }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mResponse:[m
+[32m+[m[32m{[m
+[32m+[m[32m  "meals": [ { "name": "Oat + banana", "calories": 450, "protein": 15, "cost": 1.2, "ingredients": [...] }, ... ],[m
+[32m+[m[32m  "totals": { "calories": 2005, "protein": 123, "cost": 5.8}[m
+[32m+[m[32m}[m
+[32m+[m[32m```[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## Algorithms & approach 🧩[m
+[32m+[m
+[32m+[m[32mMeal planning with budget and nutrient constraints is a constrained optimization problem:[m
+[32m+[m[32m- Consider knapsack / integer linear programming approaches for small-medium scale.[m
+[32m+[m[32m- For speed, heuristics and greedy algorithms work well in a prototype:[m
+[32m+[m[32m  - Pre-filter candidate foods in desired price ranges.[m
+[32m+[m[32m  - Greedy pack meals to meet calorie target, then adjust to fix macro deficits.[m
+[32m+[m[32m  - Use simple swaps (local search) to improve cost or nutrient fit.[m
+[32m+[m
+[32m+[m[32mExercise energy estimation:[m
+[32m+[m[32m- Use MET values or reliable API-provided calories burned per minute values.[m
+[32m+[m[32m- For simple prototypes use estimates: calories/min = estCaloriesPerMin (per workout card).[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## Data model suggestions 🗂️[m
+[32m+[m
+[32m+[m[32mUsers:[m
+[32m+[m[32m- id, email (hashed), profile (weight, height, age, gender), preferences[m
+[32m+[m
+[32m+[m[32mPlans:[m
+[32m+[m[32m- userId, createdAt, goals {calories, protein}, selectedWorkouts[], selectedMeals[], summary[m
+[32m+[m
+[32m+[m[32mFoods / Meals:[m
+[32m+[m[32m- externalId, name, nutrients {calories, protein, carbs, fat, fiber, micros}, estimatedCost[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## Mobile apps 📱[m
+[32m+[m
+[32m+[m[32mBuild a mobile app using:[m
+[32m+[m[32m- React Native (JavaScript/TypeScript) — code sharing with web; OR[m
+[32m+[m[32m- Flutter (Dart) — great cross-platform performance[m
+[32m+[m
+[32m+[m[32mSync to the same backend for saved plans, authentication and meal-plan generation.[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## UI / UX & Accessibility ♿[m
+[32m+[m[32m- Built with Bootstrap for a11y and responsive layout[m
+[32m+[m[32m- Use accessible color contrasts, keyboard navigation, ARIA attributes where needed[m
+[32m+[m[32m- Images are lazy-loaded and have alt text; replace Unsplash images with licensed assets for production[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## Testing & CI ✅[m
+[32m+[m[32m- Unit test JavaScript functions (calorie math, filters)[m
+[32m+[m[32m- Add end-to-end tests using Playwright or Cypress for key flows (calculate → update plans)[m
+[32m+[m[32m- Add CI pipeline for tests and linting (GitHub Actions recommended)[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## Deployment 🔁[m
+[32m+[m[32m- Frontend (static): Host on Netlify / Vercel / GitHub Pages[m
+[32m+[m[32m- Backend: Host on Heroku, Render, Vercel (serverless) or AWS (ECS/Lambda)[m
+[32m+[m[32m- Use environment variables for API keys and secure storage for user data[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## Roadmap 🛣️[m
+[32m+[m[32m- Server-side meal-plan generator using nutrition APIs[m
+[32m+[m[32m- User accounts, saved plans and progress tracking[m
+[32m+[m[32m- Personalized recipe scaling and shopping lists[m
+[32m+[m[32m- Integration with wearable/exercise trackers[m
+[32m+[m[32m- Native mobile apps with offline caching[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## Contributing 🤝[m
+[32m+[m[32mContributions are welcome! Please:[m
+[32m+[m[32m1. Fork the repo[m
+[32m+[m[32m2. Create a feature branch[m
+[32m+[m[32m3. Open a pull request with a clear description and tests if applicable[m
+[32m+[m
+[32m+[m[32mAdd an issue for large features before implementation to discuss approach.[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## License 📄[m
+[32m+[m[32mMIT — see LICENSE file.[m
+[32m+[m
+[32m+[m[32m---[m
+[32m+[m
+[32m+[m[32m## Contact ✉️[m
+[32m+[m[32mFor questions or collaboration ideas, open an issue in this repository or contact the maintainer.[m
